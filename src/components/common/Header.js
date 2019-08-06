@@ -2,10 +2,13 @@ import React from 'react';
 import { Text, View } from 'react-native';
 
 const Header = (props) => {
-  const { textStyle, viewStyle } = styles;
+    const { textStyle, viewStyle } = styles;
+    const date = new Date();
+    const dateFormat = date.toDateString();
     return (
            <View style={viewStyle}>
              <Text style={textStyle}>{props.headerText}</Text>
+             <Text>{dateFormat}</Text>
            </View>
     );
 };
