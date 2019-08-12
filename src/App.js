@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import firebase from 'firebase';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -8,8 +8,7 @@ import Login from './components/Login';
 import HomePage from './components/HomePage';
 import reducers from './reducers';
 import { Header, Button, Spinner, CardSection } from './components/common';
-import Facebook from './components/Facebook';
-
+//import Facebook from './components/Facebook';
 
 export default class App extends Component {
   state = { loggedIn: null };
@@ -48,7 +47,7 @@ export default class App extends Component {
               <Button onPress={() => firebase.auth().signOut()}>
                 Log Out
               </Button>
-            </CardSection>
+              </CardSection>
             </View>
             
           );
@@ -57,9 +56,8 @@ export default class App extends Component {
           <View>
             <Header headerText={'Welcome to DiningOut'} />
             <Login />
-            <Text>Log in using Facebook!</Text>
-            
-          </View>
+           
+          </View>  
           
           );
       default:
@@ -75,7 +73,6 @@ export default class App extends Component {
     return (
       <Provider store={createStore(reducers)}>
         <View>
-          
           {this.renderContent()}
         </View>
       </Provider>
