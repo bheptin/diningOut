@@ -10,6 +10,7 @@ import reducers from './reducers';
 import { Header, Button, Spinner, CardSection } from './components/common';
 //import Facebook from './components/Facebook';
 
+
 export default class App extends Component {
   state = { loggedIn: null };
 
@@ -31,6 +32,13 @@ export default class App extends Component {
         this.setState({ loggedIn: false });
       }
     });
+    /*firebase.database().ref('Users/user3').set({
+      firstName: 'Anthony',
+      lastName: 'Mitchell',
+      age: 36
+    }).then(() => {
+      console.log('Inserted!');
+    });*/
   }
 
   componentDidMount() {
@@ -42,7 +50,7 @@ export default class App extends Component {
       case true: 
           return (
             <View>
-              <HomePage />
+              <HomePage user={this.props.user} />
               <CardSection style={styles.logOutButton}>
               <Button onPress={() => firebase.auth().signOut()}>
                 Log Out

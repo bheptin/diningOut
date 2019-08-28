@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import firebase from 'firebase';
 import { Header } from './common/Header';
 import FriendList from './FriendList';
 
 class HomePage extends Component {
-    componentWillMount() {
-        
+    
+        componentDidMount() {
+            this.user = firebase.database().ref();
+        console.log(this.props.user);
     }
 
     render() {
         return (
             <View>
                 <Header headerText={'Welcome'} />
+                <FriendList user={this.props.user} />
             </View>
         );
     } 

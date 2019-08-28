@@ -8,6 +8,8 @@
     "react-devtools": "react-devtools"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.6.1",
+    "AsyncStorage": "^0.1.5",
     "firebase": "^6.3.0",
     "native-base": "^2.12.1",
     "react": "16.8.3",

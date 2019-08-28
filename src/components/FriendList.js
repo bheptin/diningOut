@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
-import { Text, View, SectionList, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
+import firebase from 'firebase';
 
 class FriendList extends Component {
+
+    componentWillMount() {
+        firebase.database().ref('Users').once('value', (data) => {
+            console.log(data.toJSON());   
+        });
+    }
+
     render() {
         return (
             <View stle={styles.container}>
                 <Text>Friend's List</Text>
-                <SectionList
-                sections={[
-                    { title: 'D', data: ['Devin'] },
-                    { title: 'J', 
-                    data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie'] },
-                ]}
-                renderItem={({ item }) => <Text style={styles.item}>{item}</Text>}
-                renderSectionHeader={({ section }) => 
-                    <Text style={styles.sectionHeader}>{section.title}</Text>}
-                keyExtractor={(item, index) => index}
-                />
+                <Text>hello</Text>
             </View>
         );
     } 
