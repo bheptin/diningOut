@@ -1,45 +1,43 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import firebase from 'firebase';
+import { connect } from 'react-redux';
+import { Text } from 'react-native';
+import { Card } from './common';
 
 class FriendList extends Component {
-
-    componentWillMount() {
-        firebase.database().ref('Users').once('value', (data) => {
-            console.log(data.toJSON());   
-        });
-    }
-
     render() {
         return (
-            <View stle={styles.container}>
-                <Text>Friend's List</Text>
-                <Text>hello</Text>
-            </View>
+           <Card style={styles.mainCard}>
+               <Text>Friends List</Text>
+           </Card>
         );
-    } 
+    }
 }
 
-const styles = StyleSheet.create({
-    container: {
-     flex: 1,
-     paddingTop: 22
-    },
-    sectionHeader: {
-      paddingTop: 2,
-      paddingLeft: 10,
-      paddingRight: 10,
-      paddingBottom: 2,
-      fontSize: 14,
-      fontWeight: 'bold',
-      backgroundColor: 'rgba(247,247,247,1.0)',
-    },
-    item: {
-      padding: 10,
-      fontSize: 18,
-      height: 44,
-    },
-  });
-  
+const styles = {
+    imageWrapper: {
+        width: 250,
+        height: 200,
+        borderRadius: 20,
+        justifyContent: 'center',
+        flex: 1,
+     },
+     button: {
+        width: 30,
+        height: 30,
+        backgroundColor: 'red',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+        borderRadius: 20,
+        position: 'absolute',
+        left: 20,
+        top: 20
+      },
+      
+};
 
-export default FriendList;
+const mapStateToProps = state => {
+    return { friends: state.friends };
+    };
+
+export default connect(mapStateToProps)(FriendList);
