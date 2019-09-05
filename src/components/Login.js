@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { Card, CardSection, Button, Input, Spinner } from './common';
-import { emailChanged, passwordChanged, loginUser } from '../actions';
+import { emailChanged, passwordChanged, loginUser, newUser } from '../actions';
 
 class Login extends Component {
   
@@ -21,8 +22,11 @@ onButtonPress() {
 }
 
 createAccountButton() {
+  if (this.props.loading) {
+    return <Spinner size="large" />;
+  }
   return (
-    <Button>
+    <Button onPress={() => Actions.newUser()}>
             Create Account
     </Button>
   );
@@ -97,4 +101,4 @@ const mapStateToProps = ({ auth }) => {
 };
 
 export default connect(mapStateToProps, { 
-  emailChanged, passwordChanged, loginUser })(Login);
+  emailChanged, passwordChanged, loginUser, newUser })(Login);

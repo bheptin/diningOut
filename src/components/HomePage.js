@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
 import { View, Image } from 'react-native';
-import { Header, Card, CardSection, Button } from './common';
+import { connect } from 'react-redux';
+import { Header, Card, CardSection, Button, Spinner } from './common';
+import { loginUser } from '../actions';
+import FriendList from '../components/FriendList';
 
 class HomePage extends Component {
+    
+      onFriendsButtonPress() {
+          return (
+              <FriendList />
+          );
+      }
 
-   /* componentDidMount() {
-        firebase.auth().onAuthStateChanged((user) => {
-            this.setState({ user });
-            const userId = user.uid;
-
-            firebase.database().ref(`Users/${userId}`).once('value').then((snapshot) => {
-                const license = (snapshot.val() && snapshot.val().license);
-                this.setState(license.bind(this));
-                console.log(user);
-            });
-      });
-    }*/
+      renderFriendsButton() {
+        if (this.props.loading) {
+          return <Spinner size="large" />;
+        }
+        return (
+            <Button style={styles.button} onPress={this.onFriendsButtonPress.bind(this)}>
+          Find Friends
+        </Button>
+        );
+      }
 
     render() {
         return (
@@ -29,7 +36,7 @@ class HomePage extends Component {
                         />
                     </CardSection>
                     <CardSection>
-                        <Button style={styles.button}>Find Friends</Button>
+                    {this.renderFriendsButton()}                        
                     </CardSection>
 
                     <CardSection>
@@ -70,4 +77,9 @@ const styles = {
       
 };
 
-export default HomePage;
+const mapStateToProps = ({ auth }) => {
+    const { email, password, error, loading } = auth;
+    return { email, password, error, loading };
+  };
+  
+  export default connect(mapStateToProps, { loginUser })(HomePage);
