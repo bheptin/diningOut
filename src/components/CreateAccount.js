@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Picker } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import { RegionDropdown, CountryDropdown } from 'react-country-region-selector';
 import { Card, CardSection, Button, Input, Spinner } from './common';
-import { emailChanged, passwordChanged, loginUser, newUser } from '../actions';
+import { emailChanged, passwordChanged, loginUser, 
+          newUser, countryChanged, regionChanged } from '../actions';
 
 class CreateAccount extends Component {
 
@@ -21,6 +23,14 @@ class CreateAccount extends Component {
     
       onLastNameChange(text) {
         this.props.lastNameChanged(text);
+      }
+
+      onCountryChanged(text) {
+        this.props.countryChanged(text);
+      }
+
+      onRegionChanged(text) {
+        this.props.regionChanged(text);
       }
     
     onButtonPress() {
@@ -85,17 +95,31 @@ class CreateAccount extends Component {
               </CardSection>
               <CardSection>
                 <Input 
+                label="First Name"
                   placeholder="First Name"
                   onChangeText={this.onFirstNameChange.bind(this)}
                   value={this.props.firstName}
                 />
+               </CardSection>
+              <CardSection>
                 <Input 
+                  label="Last Name"
                   placeholder="Last Name"
                   onChangeText={this.onLastNameChange.bind(this)}
                   value={this.props.lastName}
                 />
               </CardSection>
-              {this.renderError()}
+              <CardSection>
+                <Input 
+                  label="Street Address"
+                  placeholder="ex: 123 Main st."
+                  onChangeText={this.onLastNameChange.bind(this)}
+                  value={this.props.lastName}
+                />
+              </CardSection>
+              <CardSection>
+                <RegionDropdown />
+              </CardSection>
               <CardSection>
                 {this.renderButton()}
               </CardSection>  
@@ -118,5 +142,10 @@ class CreateAccount extends Component {
   };
   
   export default connect(mapStateToProps, { 
-    emailChanged, passwordChanged, loginUser, newUser })(CreateAccount);
+    emailChanged, 
+    passwordChanged, 
+    loginUser,
+    newUser, 
+    countryChanged, 
+    regionChanged })(CreateAccount);
   

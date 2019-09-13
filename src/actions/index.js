@@ -5,8 +5,23 @@ import { EMAIL_CHANGED,
          PASSWORD_CHANGED, 
          LOGIN_USER_SUCCESS, 
          LOGIN_USER_FAIL, 
-         LOGIN_USER_START } from './types';
+         LOGIN_USER_START,
+         COUNTRY_CHANGED,
+         REGION_CHANGED } from './types';
 
+export const countryChanged = (text) => {
+    return {
+        type: COUNTRY_CHANGED,
+        payload: text
+    };
+};
+
+export const regionChanged = (text) => {
+    return {
+        type: REGION_CHANGED,
+        payload: text
+    };
+};
 
 export const emailChanged = (text) => {
     return {
