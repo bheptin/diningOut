@@ -13,6 +13,7 @@
     "firebase": "^6.3.0",
     "native-base": "^2.12.1",
     "react": "16.8.3",
+    "react-country-region-selector": "^1.4.4",
     "react-facebook-login": "^4.1.1",
     "react-native": "0.59.5",
     "react-native-router-flux": "^4.0.6",

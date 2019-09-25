@@ -5,23 +5,23 @@ import { NEW_USER,
          LOGIN_USER_FAIL,
          LOGIN_USER_START,
          COUNTRY_CHANGED,
-         REGION_CHANGED } from '../actions/types';
+         STATE_CHANGED } from '../actions/types';
 
 const INITIAL_STATE = { email: '', 
                         password: '',
                         user: null,
                         error: '',
                         loading: false,
-                        country: '',
-                        region: ''
+                        country: 'United States',
+                        state: ''
                      };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case COUNTRY_CHANGED:
-            return { ...state, user: action.payload, country: '' };
-        case REGION_CHANGED:
-            return { ...state, user: action.payload, region: '' };
+            return { ...state, user: action.payload, country: 'United States' };
+        case STATE_CHANGED:
+            return { ...state, user: action.payload, state: '' };
         case NEW_USER:
             return { ...state, user: action.payload };
         case EMAIL_CHANGED:    

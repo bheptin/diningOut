@@ -7,7 +7,7 @@ import { EMAIL_CHANGED,
          LOGIN_USER_FAIL, 
          LOGIN_USER_START,
          COUNTRY_CHANGED,
-         REGION_CHANGED } from './types';
+         STATE_CHANGED } from './types';
 
 export const countryChanged = (text) => {
     return {
@@ -16,9 +16,9 @@ export const countryChanged = (text) => {
     };
 };
 
-export const regionChanged = (text) => {
+export const stateChanged = (text) => {
     return {
-        type: REGION_CHANGED,
+        type: STATE_CHANGED,
         payload: text
     };
 };
