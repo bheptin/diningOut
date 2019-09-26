@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, Picker, Item } from 'react-native';
+import { View, Text, Picker } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 //import { RegionDropdown } from 'react-country-region-selector';
-import { Card, CardSection, Button, Input, Spinner } from './common';
+import { Card, CardSection, Button, Input } from './common';
 import { emailChanged, passwordChanged, loginUser, 
           newUser, countryChanged, stateChanged } from '../actions';
 
@@ -29,36 +29,10 @@ class CreateAccount extends Component {
         this.props.countryChanged(text);
       }
 
-      onStateChange(text) {
-        this.props.stateChanged(text);
-      }
-    
     onButtonPress() {
       const { email, password } = this.props;
     
       this.props.loginUser({ email, password });
-    }
-    
-    createAccountButton() {
-      if (this.props.loading) {
-        return <Spinner size="large" />;
-      }
-      return (
-        <Button onPress={() => Actions.newUser()}>
-                Create Account
-        </Button>
-      );
-    }
-    
-    renderButton() {
-      if (this.props.loading) {
-        return <Spinner size="large" />;
-      }
-      return (
-        <Button onPress={this.onButtonPress.bind(this)}>
-        Log in
-      </Button>
-      );
     }
     
       renderError() {
@@ -84,6 +58,7 @@ class CreateAccount extends Component {
                   value={this.props.email}
                 />
               </CardSection>
+
               <CardSection>
                 <Input 
                   secureTextEntry
@@ -93,6 +68,7 @@ class CreateAccount extends Component {
                   value={this.props.password}
                 />
               </CardSection>
+
               <CardSection>
                 <Input 
                 label="First Name"
@@ -101,6 +77,7 @@ class CreateAccount extends Component {
                   value={this.props.firstName}
                 />
                </CardSection>
+
               <CardSection>
                 <Input 
                   label="Last Name"
@@ -109,6 +86,7 @@ class CreateAccount extends Component {
                   value={this.props.lastName}
                 />
               </CardSection>
+              
               <CardSection>
                 <Input 
                   label="Street Address"
@@ -117,13 +95,14 @@ class CreateAccount extends Component {
                   value={this.props.lastName}
                 />
               </CardSection>
-              <CardSection>
+
+              <CardSection style={{ flexDirection: 'column' }}>
+                <Text>Choose State</Text>
                 <Picker
-                selectedValue={this.onStateChange.bind(this)}
-                onValueChange={this.props.state}
-                  style={{ height: 50, width: 100 }}
+                
+                selectedValue={this.props.stateChoice}
+                onValueChange={text => this.props.stateChanged(text)}
                 >
-                  <Picker.Item value='state' label='Choose your state' />
                   <Picker.Item label="Alabama" value="Alabama" />
                   <Picker.Item label="Alaska" value="Alaska" />
                   <Picker.Item label="Arizona" value="Arizona" />
@@ -176,8 +155,11 @@ class CreateAccount extends Component {
                   <Picker.Item label="Wyoming" value="Wyoming" />
                 </Picker>
               </CardSection>
+
               <CardSection>
-                {this.renderButton()}
+                <Button onPress={() => Actions.newUser()}>
+                    Create Account
+                </Button>
               </CardSection>  
             </Card>
         );
@@ -193,8 +175,8 @@ class CreateAccount extends Component {
   };
   
   const mapStateToProps = ({ auth }) => {
-    const { email, password, error, loading } = auth;
-    return { email, password, error, loading };
+    const { email, password, error, loading, country, stateChoice } = auth;
+    return { email, password, error, loading, country, stateChoice };
   };
   
   export default connect(mapStateToProps, { 

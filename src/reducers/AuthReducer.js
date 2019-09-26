@@ -13,7 +13,7 @@ const INITIAL_STATE = { email: '',
                         error: '',
                         loading: false,
                         country: 'United States',
-                        state: ''
+                        stateChoice: ''
                      };
 
 export default (state = INITIAL_STATE, action) => {
@@ -21,7 +21,7 @@ export default (state = INITIAL_STATE, action) => {
         case COUNTRY_CHANGED:
             return { ...state, user: action.payload, country: 'United States' };
         case STATE_CHANGED:
-            return { ...state, user: action.payload, state: '' };
+            return { ...state, stateChoice: action.payload };
         case NEW_USER:
             return { ...state, user: action.payload };
         case EMAIL_CHANGED:    
