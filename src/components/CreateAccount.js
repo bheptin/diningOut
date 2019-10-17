@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, Picker } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+//import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-//import { RegionDropdown } from 'react-country-region-selector';
-import { Card, CardSection, Button, Input } from './common';
+import { Card, CardSection, Button, Input, Spinner } from './common';
 import { emailChanged, passwordChanged, loginUser, 
-          newUser, countryChanged, stateChanged } from '../actions';
+          newUser, countryChanged, stateChanged, 
+          firstNameChanged, lastNameChanged, streetAddressChanged, userCreate } from '../actions';
 
 class CreateAccount extends Component {
 
@@ -25,14 +25,29 @@ class CreateAccount extends Component {
         this.props.lastNameChanged(text);
       }
 
+      onStreetAddressChange(text) {
+        this.props.streetAddressChanged(text);
+      }
+
       onCountryChange(text) {
         this.props.countryChanged(text);
       }
 
     onButtonPress() {
-      const { email, password } = this.props;
-    
-      this.props.loginUser({ email, password });
+      const { email, firstName, lastName, streetAddress, stateChoice, password } = this.props;
+      this.props.loginUser({ email, password, firstName, lastName, streetAddress, stateChoice });
+      console.log(this.props);
+    }
+
+    renderButton() {
+      if (this.props.loading) {
+        return <Spinner size="large" />;
+      }
+      return (
+        <Button onPress={this.onButtonPress.bind(this)}>
+        Create
+      </Button>
+      );
     }
     
       renderError() {
@@ -91,8 +106,8 @@ class CreateAccount extends Component {
                 <Input 
                   label="Street Address"
                   placeholder="ex: 123 Main st."
-                  onChangeText={this.onLastNameChange.bind(this)}
-                  value={this.props.lastName}
+                  onChangeText={this.onStreetAddressChange.bind(this)}
+                  value={this.props.streetAddress}
                 />
               </CardSection>
 
@@ -155,11 +170,9 @@ class CreateAccount extends Component {
                   <Picker.Item label="Wyoming" value="Wyoming" />
                 </Picker>
               </CardSection>
-
+              {this.renderError()}
               <CardSection>
-                <Button onPress={() => Actions.newUser()}>
-                    Create Account
-                </Button>
+                {this.renderButton()}
               </CardSection>  
             </Card>
         );
@@ -175,8 +188,17 @@ class CreateAccount extends Component {
   };
   
   const mapStateToProps = ({ auth }) => {
-    const { email, password, error, loading, country, stateChoice } = auth;
-    return { email, password, error, loading, country, stateChoice };
+    const { email, password, error, loading, country, stateChoice, 
+    firstName, lastName, streetAddress } = auth;
+    return { email, 
+             password, 
+             error, 
+             loading, 
+             country, 
+             stateChoice,
+             firstName, 
+             lastName, 
+             streetAddress };
   };
   
   export default connect(mapStateToProps, { 
@@ -184,6 +206,10 @@ class CreateAccount extends Component {
     passwordChanged, 
     loginUser,
     newUser, 
+    firstNameChanged,
+    lastNameChanged,
+    streetAddressChanged,
     countryChanged, 
-    stateChanged })(CreateAccount);
+    stateChanged,
+    userCreate })(CreateAccount);
   
