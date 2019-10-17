@@ -7,7 +7,7 @@ const Header = (props) => {
     const dateFormat = date.toDateString();
     return (
            <View style={viewStyle}>
-             <Text style={textStyle}>{props.headerText}</Text>
+             <Text style={textStyle}>{props.headerText}{props.userName}</Text>
              <Text>{dateFormat}</Text>
            </View>
     );

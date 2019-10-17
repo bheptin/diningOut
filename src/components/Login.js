@@ -3,7 +3,18 @@ import { View, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { Card, CardSection, Button, Input, Spinner } from './common';
-import { emailChanged, passwordChanged, loginUser, newUser } from '../actions';
+import { emailChanged, 
+         passwordChanged, 
+         loginUser, 
+         newUser, 
+         countryChanged, 
+         stateChanged, 
+         userUID, 
+         firstNameChanged, 
+         lastNameChanged, 
+         streetAddressChanged, 
+         userCreate 
+        } from '../actions';
 
 class Login extends Component {
   
@@ -15,10 +26,54 @@ class Login extends Component {
     this.props.passwordChanged(text);
   }
 
-onButtonPress() {
-  const { email, password } = this.props;
+  onUIDCreation(text) {
+    this.props.userUID(text);
+  }
 
-  this.props.loginUser({ email, password });
+  onFirstNameChange(text) {
+    this.props.firstNameChanged(text);
+  }
+
+  onLastNameChange(text) {
+    this.props.lastNameChanged(text);
+  }
+
+  onStreetAddressChange(text) {
+    this.props.streetAddressChanged(text);
+  }
+
+  onCountryChange(text) {
+    this.props.countryChanged(text);
+  }
+
+
+onButtonPress() {
+  const { email, 
+    password, 
+    user, 
+    error, 
+    loading, 
+    UID, 
+    firstName, 
+    lastName, 
+    streetAddress, 
+    country, 
+    stateChoice   
+  } = this.props;
+
+  this.props.loginUser({ email, 
+    password, 
+    user, 
+    error, 
+    loading, 
+    UID, 
+    firstName, 
+    lastName, 
+    streetAddress, 
+    country, 
+    stateChoice 
+   });
+   console.log(this.props);
 }
 
 createAccountButton() {
@@ -96,9 +151,44 @@ const styles = {
 };
 
 const mapStateToProps = ({ auth }) => {
-  const { email, password, error, loading } = auth;
-  return { email, password, error, loading };
+  const { 
+    email, 
+    password, 
+    user, 
+    error, 
+    loading, 
+    UID, 
+    firstName, 
+    lastName, 
+    streetAddress, 
+    country, 
+    stateChoice 
+        } = auth;
+  return { 
+    email, 
+    password, 
+    user, 
+    error, 
+    loading, 
+    UID, 
+    firstName, 
+    lastName, 
+    streetAddress, 
+    country, 
+    stateChoice 
+         };
 };
 
 export default connect(mapStateToProps, { 
-  emailChanged, passwordChanged, loginUser, newUser })(Login);
+  emailChanged, 
+  passwordChanged, 
+  loginUser, 
+  newUser, 
+  countryChanged, 
+  stateChanged, 
+  userUID, 
+  firstNameChanged, 
+  lastNameChanged, 
+  streetAddressChanged, 
+  userCreate 
+ })(Login);

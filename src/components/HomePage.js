@@ -27,7 +27,10 @@ class HomePage extends Component {
     render() {
         return (
             <View>
-                <Header headerText={'Welcome to diningOut'} />
+                <Header 
+                    headerText={'Welcome to diningOut'} 
+                    userName={this.props.UID.firstName}
+                />
                 <Card style={styles.mainCard}>
                     <CardSection>
                         <Image 
@@ -78,8 +81,30 @@ const styles = {
 };
 
 const mapStateToProps = ({ auth }) => {
-    const { email, password, error, loading } = auth;
-    return { email, password, error, loading };
+    const { email, 
+        password, 
+        user, 
+        error, 
+        loading, 
+        UID, 
+        firstName, 
+        lastName, 
+        streetAddress, 
+        country, 
+        stateChoice   
+    } = auth;
+    return { email, 
+        password, 
+        user, 
+        error, 
+        loading, 
+        UID, 
+        firstName, 
+        lastName, 
+        streetAddress, 
+        country, 
+        stateChoice 
+    };
   };
   
   export default connect(mapStateToProps, { loginUser })(HomePage);

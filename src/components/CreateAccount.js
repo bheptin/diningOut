@@ -4,8 +4,9 @@ import { View, Text, Picker } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, CardSection, Button, Input, Spinner } from './common';
 import { emailChanged, passwordChanged, loginUser, 
-          newUser, countryChanged, stateChanged, 
-          firstNameChanged, lastNameChanged, streetAddressChanged, userCreate } from '../actions';
+          userCreate, countryChanged, stateChanged, 
+          userUID, firstNameChanged, lastNameChanged, streetAddressChanged 
+        } from '../actions';
 
 class CreateAccount extends Component {
 
@@ -17,6 +18,10 @@ class CreateAccount extends Component {
         this.props.passwordChanged(text);
       }
     
+      onUIDCreation(text) {
+        this.props.userUID(text);
+      }
+
       onFirstNameChange(text) {
         this.props.firstNameChanged(text);
       }
@@ -34,8 +39,9 @@ class CreateAccount extends Component {
       }
 
     onButtonPress() {
-      const { email, firstName, lastName, streetAddress, stateChoice, password } = this.props;
-      this.props.loginUser({ email, password, firstName, lastName, streetAddress, stateChoice });
+      const { email, firstName, lastName, streetAddress, stateChoice, password, UID } = this.props;
+      this.props.userCreate({ 
+          email, password, firstName, lastName, streetAddress, stateChoice, UID });
       console.log(this.props);
     }
 
@@ -44,7 +50,9 @@ class CreateAccount extends Component {
         return <Spinner size="large" />;
       }
       return (
-        <Button onPress={this.onButtonPress.bind(this)}>
+        <Button 
+          onPress={this.onButtonPress.bind(this)}
+        >
         Create
       </Button>
       );
@@ -189,13 +197,14 @@ class CreateAccount extends Component {
   
   const mapStateToProps = ({ auth }) => {
     const { email, password, error, loading, country, stateChoice, 
-    firstName, lastName, streetAddress } = auth;
+    UID, firstName, lastName, streetAddress } = auth;
     return { email, 
              password, 
              error, 
              loading, 
              country, 
              stateChoice,
+             UID,
              firstName, 
              lastName, 
              streetAddress };
@@ -204,8 +213,8 @@ class CreateAccount extends Component {
   export default connect(mapStateToProps, { 
     emailChanged, 
     passwordChanged, 
-    loginUser,
-    newUser, 
+    loginUser, 
+    userUID,
     firstNameChanged,
     lastNameChanged,
     streetAddressChanged,

@@ -1,10 +1,11 @@
-import { NEW_USER,
+import { NEW_USER_SUCCESS,
          EMAIL_CHANGED, 
          PASSWORD_CHANGED, 
          LOGIN_USER_SUCCESS, 
          LOGIN_USER_FAIL,
          LOGIN_USER_START,
          STREET_ADDRESS_CHANGED,
+         USER_UID,
          FIRST_NAME_CHANGED,
          LAST_NAME_CHANGED,
          COUNTRY_CHANGED,
@@ -15,6 +16,7 @@ const INITIAL_STATE = { email: '',
                         user: null,
                         error: '',
                         loading: false,
+                        UID: '',
                         firstName: '',
                         lastName: '',
                         streetAddress: '',
@@ -26,6 +28,8 @@ export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case STREET_ADDRESS_CHANGED:
             return { ...state, streetAddress: action.payload };
+        case USER_UID:
+            return { ...state, UID: action.payload };
         case FIRST_NAME_CHANGED:
             return { ...state, firstName: action.payload };
         case LAST_NAME_CHANGED:
@@ -34,7 +38,7 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, user: action.payload, country: 'United States' };
         case STATE_CHANGED:
             return { ...state, stateChoice: action.payload };
-        case NEW_USER:
+        case NEW_USER_SUCCESS:
             return { ...state, user: action.payload };
         case EMAIL_CHANGED:    
             return { ...state, email: action.payload };  
