@@ -7,7 +7,7 @@ import { friendsFetch } from '../actions';
 import FriendItem from './FriendItem';
 import { CardSection, Spinner, Button, Header } from './common';
 
-class FriendList extends Component {
+class AddFriend extends Component {
     componentWillMount() {
         this.props.friendsFetch();
 
@@ -48,18 +48,17 @@ class FriendList extends Component {
         
         return (
             <View>
-                <Header 
-                    headerText={'Welcome to diningOut'} 
+            <Header 
+                headerText={'Welcome to diningOut'} 
+            />
+            <CardSection>
+                <ListView
+                    enableEmptySections
+                    dataSource={this.dataSource}
+                    renderRow={this.renderRow}
                 />
-                <CardSection>
-                    <ListView
-                        enableEmptySections
-                        dataSource={this.dataSource}
-                        renderRow={this.renderRow}
-                    />
-                    {this.renderAddFriendsButton()}
-                </CardSection>
-            </View>
+            </CardSection>
+        </View>
         );
     }
 }
@@ -72,4 +71,4 @@ const mapStateToProps = state => {
     return { friends };
 };
 
-export default connect(mapStateToProps, { friendsFetch })(FriendList);
+export default connect(mapStateToProps, { friendsFetch })(AddFriend);

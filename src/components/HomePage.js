@@ -1,26 +1,20 @@
 import React, { Component } from 'react';
+import { Actions } from 'react-native-router-flux';
 import { View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { Header, Card, CardSection, Button, Spinner } from './common';
 import { loginUser } from '../actions';
-import FriendList from '../components/FriendList';
 
 class HomePage extends Component {
-    
-      onFriendsButtonPress() {
-          return (
-              <FriendList />
-          );
-      }
 
       renderFriendsButton() {
         if (this.props.loading) {
           return <Spinner size="large" />;
         }
         return (
-            <Button style={styles.button} onPress={this.onFriendsButtonPress.bind(this)}>
-          Find Friends
-        </Button>
+            <Button onPress={() => Actions.friendList()}>
+                Friends List
+            </Button>
         );
       }
 
@@ -29,7 +23,6 @@ class HomePage extends Component {
             <View>
                 <Header 
                     headerText={'Welcome to diningOut'} 
-                    userName={this.props.UID.firstName}
                 />
                 <Card style={styles.mainCard}>
                     <CardSection>

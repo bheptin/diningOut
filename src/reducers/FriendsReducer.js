@@ -1,3 +1,14 @@
-import Firebase from './Firebase';
+import {
+    FRIENDLIST_FETCH_SUCCESS
+} from '../actions/types';
 
-export default () => Firebase;
+const INITIAL_STATE = {};
+
+export default (state = INITIAL_STATE, action) => {
+    switch (action.type) {
+        case FRIENDLIST_FETCH_SUCCESS:
+            return action.payload;
+        default:
+            return state;
+    }
+};

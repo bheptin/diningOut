@@ -11,6 +11,7 @@
     "@react-native-community/async-storage": "^1.6.1",
     "AsyncStorage": "^0.1.5",
     "firebase": "^6.3.0",
+    "lodash": "^4.17.15",
     "native-base": "^2.12.1",
     "react": "16.8.3",
     "react-country-region-selector": "^1.4.4",

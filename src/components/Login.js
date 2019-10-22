@@ -73,13 +73,9 @@ onButtonPress() {
     country, 
     stateChoice 
    });
-   console.log(this.props);
 }
 
 createAccountButton() {
-  if (this.props.loading) {
-    return <Spinner size="large" />;
-  }
   return (
     <Button onPress={() => Actions.newUser()}>
             Create Account

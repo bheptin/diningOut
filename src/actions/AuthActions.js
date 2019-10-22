@@ -81,8 +81,8 @@ export const userCreate = ({
 
                 firebase.auth().createUserWithEmailAndPassword(email, password)
                 .then(() => { 
-                    const { currentUser } = firebase.auth();
-                    firebase.database().ref(`/users/${currentUser.uid}`)
+                    //const { currentUser } = firebase.auth();
+                    firebase.database().ref('/users/')
                         .push({ lastName, firstName, streetAddress, stateChoice, email })
                         .then(user => newUserSuccess(dispatch, user));
                 })

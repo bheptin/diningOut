@@ -10,3 +10,8 @@ export const USER_UID = 'user_uid';
 export const FIRST_NAME_CHANGED = 'first_name_changed';
 export const LAST_NAME_CHANGED = 'last_name_changed';
 export const STREET_ADDRESS_CHANGED = 'street_address_changed';
+
+
+export const FRIENDLIST_CREATE = 'friendlist_create';
+export const FRIENDLIST_UPDATE = 'friendlist_update';
+export const FRIENDLIST_FETCH_SUCCESS = 'friendlist_fetch_success';
